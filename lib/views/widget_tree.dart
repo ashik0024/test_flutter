@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter_001/views/data/notifiers.dart';
 import 'package:test_flutter_001/views/pages/home.dart';
 import 'package:test_flutter_001/views/pages/profile.dart';
 import 'package:test_flutter_001/views/pages/settings.dart';
@@ -47,7 +48,9 @@ class WidgetTree extends StatelessWidget {
       //   backgroundColor: Colors.deepPurple,
       //   child: const Icon(Icons.add),
       // ),
-      body: pages.elementAt(1),
+      body: ValueListenableBuilder(valueListenable: pageIndexNotifier, builder: (context,int selectedPage,child) {
+        return pages.elementAt(selectedPage);
+      },),
       bottomNavigationBar: BottomNavWidget(),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter_001/views/data/notifiers.dart';
 import 'package:test_flutter_001/views/widget_tree.dart';
 
 
@@ -31,14 +32,24 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-      return MaterialApp(
-      title: "Ashik",
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        brightness: Brightness.light,
-      ),
-      home: WidgetTree(),
+    return ValueListenableBuilder(
+      valueListenable: darkModeNotifier,
+      builder: (context, bool isDarkMode, child) {
+        final colorScheme = ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+          brightness: isDarkMode ? Brightness.dark : Brightness.light,
+        );
+
+        return MaterialApp(
+          title: "Ashik",
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            colorScheme: colorScheme,
+            useMaterial3: true, // optional, looks better
+          ),
+          home: WidgetTree(),
+        );
+      },
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_flutter_001/views/widgets/hero_widget.dart';
 
 
 
@@ -10,11 +11,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(child: Column(
       children: [
-        Image.asset(
-          'assets/images/testOne.png',
-          width: double.infinity,
-          fit: BoxFit.cover,
-        ),
+            HeroWidget(),
         Text(tittle),
       ],
     ));

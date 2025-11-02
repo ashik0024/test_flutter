@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter_001/views/data/notifiers.dart';
+import 'package:test_flutter_001/views/pages/WelcomePage.dart';
 import 'package:test_flutter_001/views/widget_tree.dart';
 
 
@@ -47,7 +48,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
             colorScheme: colorScheme,
             useMaterial3: true, // optional, looks better
           ),
-          home: WidgetTree(),
+          home: WelcomePage(),
         );
       },
     );

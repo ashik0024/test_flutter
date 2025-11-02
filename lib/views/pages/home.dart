@@ -8,6 +8,15 @@ class HomePage extends StatelessWidget {
   final String tittle;
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text(tittle));
+    return Center(child: Column(
+      children: [
+        Image.asset(
+          'assets/images/testOne.png',
+          width: double.infinity,
+          fit: BoxFit.cover,
+        ),
+        Text(tittle),
+      ],
+    ));
   }
 }

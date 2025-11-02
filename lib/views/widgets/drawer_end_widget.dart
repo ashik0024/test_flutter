@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter_001/views/data/notifiers.dart';
 
+import '../pages/settings.dart';
+
 
 
 class EndDrawerWidget extends StatefulWidget {
@@ -77,11 +79,22 @@ class _EndDrawerWidgetState extends State<EndDrawerWidget> with SingleTickerProv
                         },
                       ),
                       ListTile(
-                        leading: Icon(Icons.settings),
-                        title: Text("Settings"),
+                        leading: Icon(Icons.search),
+                        title: Text("Search"),
                         onTap: () {
                           pageIndexNotifier.value=2;
                           Navigator.pop(context);
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.settings),
+                        title: Text("Settings"),
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            return SettingsPage(tittle: "Settings");
+                          },),);
+                          // pageIndexNotifier.value=2;
+                          // Navigator.pop(context);
                         },
                       ),
 

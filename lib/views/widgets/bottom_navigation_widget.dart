@@ -19,7 +19,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
               destinations: [
                 NavigationDestination(icon: Icon(Icons.home), label: "Home"),
                 NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
-                NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
+                NavigationDestination(icon: Icon(Icons.search), label: "Search"),
               ],
               selectedIndex: selectedPage,
               onDestinationSelected: (int index) {

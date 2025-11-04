@@ -109,6 +109,7 @@ class _EndDrawerWidgetState extends State<EndDrawerWidget> with SingleTickerProv
                         onTap: () {
                           // darkModeNotifier.value = !darkModeNotifier.value;
                           // Navigator.pop(context);
+
                         },
                           trailing: Transform.scale(
                             scale: 0.7, // 🔹 increase/decrease size (default = 1.0)
@@ -116,6 +117,15 @@ class _EndDrawerWidgetState extends State<EndDrawerWidget> with SingleTickerProv
                               value: darkModeNotifier.value,
                               onChanged: (value) {
                                 darkModeNotifier.value = value;
+                                if (darkModeNotifier.value) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("Dark Mode is Enabled"))
+                                  );
+                                }else{
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text("Light Mode is Enabled"))
+                                  );
+                                }
                               },
                             ),
                           ),
@@ -124,7 +134,21 @@ class _EndDrawerWidgetState extends State<EndDrawerWidget> with SingleTickerProv
                         leading: Icon(Icons.logout),
                         title: Text("Logout"),
                         onTap: () {
-                          Navigator.pop(context);
+                          // Navigator.pop(context);
+                          showDialog(context: context, builder: (context){
+                            return AlertDialog(
+                              title: Text("This is Tittle"),
+                              content: Text("This is Content"),
+                              actions:[
+                                TextButton(onPressed: (){
+                                  Navigator.pop(context);
+                                }, child: Text("Cancel")),
+                                TextButton(onPressed: (){
+                                  Navigator.pop(context);
+                                }, child: Text("Ok")),
+                              ]
+                            );
+                          });
                         },
                       ),
                       Padding(

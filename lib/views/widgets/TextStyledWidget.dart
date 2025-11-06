@@ -15,4 +15,10 @@ class TextStyledWidget{
     fontWeight: FontWeight.normal,
     color: Colors.black
   );
+  static const TextStyle titleTextStyleWhite = TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
+
 }

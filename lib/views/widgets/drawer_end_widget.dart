@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter_001/views/data/notifiers.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../pages/settings.dart';
+import 'ConstantValues.dart';
 
 
 
@@ -115,8 +117,11 @@ class _EndDrawerWidgetState extends State<EndDrawerWidget> with SingleTickerProv
                             scale: 0.7, // 🔹 increase/decrease size (default = 1.0)
                             child: Switch(
                               value: darkModeNotifier.value,
-                              onChanged: (value) {
+                              onChanged: (value) async  {
+                                final SharedPreferences prefs = await SharedPreferences.getInstance();
                                 darkModeNotifier.value = value;
+                                await prefs.setBool(ConstantValues.isDarkKey,darkModeNotifier.value);
+
                                 if (darkModeNotifier.value) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(content: Text("Dark Mode is Enabled"))

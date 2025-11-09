@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:test_flutter_001/views/data/notifiers.dart';
 import 'package:test_flutter_001/views/pages/WelcomePage.dart';
 import 'package:test_flutter_001/views/widget_tree.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:test_flutter_001/views/widgets/ConstantValues.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,8 +24,14 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
+    initPreference();
   }
 
+  Future<void> initPreference() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool? isDark = prefs.getBool(ConstantValues.isDarkKey);
+    darkModeNotifier.value= isDark?? false;
+  }
   @override
   void dispose() {
     _controller.dispose();
@@ -36,6 +43,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     return ValueListenableBuilder(
       valueListenable: darkModeNotifier,
       builder: (context, bool isDarkMode, child) {
+
         final colorScheme = ColorScheme.fromSeed(
           seedColor: Colors.deepPurple,
           brightness: isDarkMode ? Brightness.dark : Brightness.light,

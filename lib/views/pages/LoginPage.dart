@@ -44,60 +44,68 @@ class _LoginPageState extends State<LoginPage> {
               color: Colors.white,
             ),
           ),
-          leading: Icon(Icons.login, color: Colors.white),
-
-          backgroundColor: Colors.purple,
-        ),
-      body: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              TextField(
-                controller: emailEditingController,
-                decoration: InputDecoration(
-                hintText: "Enter Email",
-                labelText: "Email",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(16)
-                )
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
-                onEditingComplete: (){
-                  setState(() {
-                  });
-                },
-              ),
-              SizedBox(height: 8),
-              TextField(
-                controller: passEditingController,
-                decoration: InputDecoration(
-                  hintText: "Enter Password",
-                  labelText: "Password",
+          backgroundColor: Colors.purple,
+
+        ),
+      body: SingleChildScrollView(
+        child: Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextField(
+                  controller: emailEditingController,
+                  decoration: InputDecoration(
+                  hintText: "Enter Email",
+                  labelText: "Email",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16)
                   )
+            ),
+                  onEditingComplete: (){
+                    setState(() {
+                    });
+                  },
                 ),
-              ),
-              SizedBox(height: 8),
-              FilledButton(onPressed: (){
-                if(emailEditingController.text.isEmpty||passEditingController.text.isEmpty){
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Please fill all fields"))
-                  );
-                }else{
-                  Navigator.pushReplacement(context, MaterialPageRoute(
-                    builder: (context) {
-                      return WidgetTree();
-                    },
-                  ));
-                }
-
-
-              }, child: Text("Login" ,style: TextStyledWidget.titleTextStyleWhite),
-                  style: FilledButton.styleFrom(
-                      minimumSize: Size(double.infinity,40.0)
-                  ))
-            ],
-          ),),
+                SizedBox(height: 8),
+                TextField(
+                  controller: passEditingController,
+                  decoration: InputDecoration(
+                    hintText: "Enter Password",
+                    labelText: "Password",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16)
+                    )
+                  ),
+                ),
+                SizedBox(height: 8),
+                FilledButton(onPressed: (){
+                  if(emailEditingController.text.isEmpty||passEditingController.text.isEmpty){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Please fill all fields"))
+                    );
+                  }else{
+                    Navigator.pushReplacement(context, MaterialPageRoute(
+                      builder: (context) {
+                        return WidgetTree();
+                      },
+                    ));
+                  }
+        
+        
+                }, child: Text("Login" ,style: TextStyledWidget.titleTextStyleWhite),
+                    style: FilledButton.styleFrom(
+                        minimumSize: Size(double.infinity,40.0)
+                    ))
+              ],
+            ),),
+      ),
     );
   }
 }

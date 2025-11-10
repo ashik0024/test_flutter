@@ -7,11 +7,14 @@ class HeroWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Hero(
       tag: 'hero',
-      child:ClipRRect(
-        borderRadius: BorderRadius.circular(20.0),
-        child: Image.asset('assets/images/testOne.png',
-          width: double.infinity,
-          fit: BoxFit.cover,),
+      child:AspectRatio(
+        aspectRatio: 1920/1080,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20.0),
+          child: Image.asset('assets/images/testOne.png',
+            width: double.infinity,
+            fit: BoxFit.cover,),
+        ),
       ));
   }
 }

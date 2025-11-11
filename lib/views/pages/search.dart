@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:test_flutter_001/network/api_service.dart';
 
 import '../../network/DataClass/post_model.dart';
+import '../data/fetch_post_provider.dart';
 import 'CardItem.dart';
 
 
@@ -21,43 +23,62 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    futurePosts=ApiService().fetchPosts();
-    // Wait for the Future to complete, then print the data
-    futurePosts.then((posts) {
-      for (var post in posts) {
-        print('futurePosts: Post ID: ${post.id}, Title: ${post.title}');
-      }
-    }).catchError((error) {
-      print('futurePosts: Error fetching posts: $error');
-    });
+    // kick off fetch once
+    Future.microtask(() => context.read<FetchListProvider>().fetchPostListData());
+
   }
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: futurePosts,
-        builder: (context, snapshot){
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          }
-          else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No data found'));
-          }
 
-          // Data is ready
-          final posts = snapshot.data!;
-          return ListView.builder(
-            itemCount: posts.length,
-            itemBuilder: (context, index) {
-              final post = posts[index];
-              return CardItem(
-                title: post.title,
-                description: post.body,
+    final provider = context.watch<FetchListProvider>();
+
+    return  RefreshIndicator(
+        onRefresh: () => context.read<FetchListProvider>().fetchPostListData(),
+        child: Builder(
+          builder: (_) {
+            if (provider.isLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (provider.error != null) {
+              return ListView(
+
+                children: [
+                  const SizedBox(height: 120),
+                  Center(child: Text('Error: ${provider.error}')),
+                  const SizedBox(height: 12),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () => context.read<FetchListProvider>().fetchPostListData(),
+                      child: const Text('Retry'),
+                    ),
+                  ),
+                ],
               );
-            },
-          );
-        });
+            }
+            if (provider.postList.isEmpty) {
+              return ListView(
+                children: const [
+                  SizedBox(height: 120),
+                  Center(child: Text('No data found')),
+                ],
+              );
+            }
+
+            final List<Post> posts = provider.postList;
+            return ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                final post = posts[index];
+                return CardItem(
+                  title: post.title,
+                  description: post.body,
+                );
+              },
+            );
+          },
+        ),
+      );
+
   }
 }

@@ -5,7 +5,7 @@ import 'package:test_flutter_001/network/DataClass/post_model.dart';
 
 
 class ApiService {
- static const String baseUrl = 'https://jsonplaceholder.typicode.com';
+ static const String baseUrl = 'https://dummyjson.com';
  final Duration timeoutDuration = const Duration(seconds: 10);
 
  /// 🔹 Generic GET request function
@@ -48,13 +48,24 @@ class ApiService {
   }
  }
 
- /// 🔹 Fetch posts
+// 🔹 Fetch posts
  Future<List<Post>> fetchPosts() async {
-  final data = await getRequest('/posts');
-  return (data as List).map((json) => Post.fromJson(json)).toList();
+  final data = await getRequest('/posts'); // returns { posts: [...], total, skip, limit }
+
+  if (data is Map<String, dynamic> && data['posts'] is List) {
+   final list = data['posts'] as List;
+   return list.map((e) => Post.fromJson(e as Map<String, dynamic>)).toList();
+  }
+
+  // Fallback for APIs that return a raw list
+  // if (data is List) {
+  //  return data.map((e) => Post.fromJson(e as Map<String, dynamic>)).toList();
+  // }
+
+  throw HttpException('api_service Unexpected response shape');
  }
 
 
 
 
- }
+}

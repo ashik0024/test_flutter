@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test_flutter_001/views/data/notifiers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../pages/example_provider.dart';
 import '../pages/settings.dart';
 import 'ConstantValues.dart';
 
@@ -99,7 +100,15 @@ class _EndDrawerWidgetState extends State<EndDrawerWidget> with SingleTickerProv
                           // Navigator.pop(context);
                         },
                       ),
-
+                      ListTile(
+                        leading: Icon(Icons.add),
+                        title: Text("Provider Example"),
+                        onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                            return ExampleProvider();
+                          }));
+                        },
+                      ),
 
                       Spacer(),
 

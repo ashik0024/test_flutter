@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:test_flutter_001/views/data/notifiers.dart';
+import 'package:test_flutter_001/views/data/number_list_provider.dart';
 import 'package:test_flutter_001/views/pages/WelcomePage.dart';
 import 'package:test_flutter_001/views/widget_tree.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_flutter_001/views/widgets/ConstantValues.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(create: (_)=> NumberListProvider(),child: MyApp()));
 }
 
 

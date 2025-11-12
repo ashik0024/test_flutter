@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_flutter_001/views/data/notifiers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../pages/example_provider.dart';
 import '../pages/settings.dart';
 import 'ConstantValues.dart';

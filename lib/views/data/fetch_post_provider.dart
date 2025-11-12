@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:test_flutter_001/network/DataClass/post_model.dart';
-
 import '../../network/api_service.dart';
 
 class FetchListProvider extends ChangeNotifier {

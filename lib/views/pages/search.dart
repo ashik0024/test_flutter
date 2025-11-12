@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:test_flutter_001/network/api_service.dart';
-
 import '../../network/DataClass/post_model.dart';
 import '../data/fetch_post_provider.dart';
 import 'CardItem.dart';
@@ -40,7 +38,7 @@ class _SearchPageState extends State<SearchPage> {
               return const Center(child: CircularProgressIndicator());
             }
             if (provider.error != null) {
-              return ListView(
+              return Column(
 
                 children: [
                   const SizedBox(height: 120),

@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-
 import '../widget_tree.dart';
 import '../widgets/TextStyledWidget.dart';
 

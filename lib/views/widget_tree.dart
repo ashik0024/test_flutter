@@ -3,7 +3,6 @@ import 'package:test_flutter_001/views/data/notifiers.dart';
 import 'package:test_flutter_001/views/pages/home.dart';
 import 'package:test_flutter_001/views/pages/profile.dart';
 import 'package:test_flutter_001/views/pages/search.dart';
-import 'package:test_flutter_001/views/pages/settings.dart';
 import 'package:test_flutter_001/views/widgets/bottom_navigation_widget.dart';
 import 'package:test_flutter_001/views/widgets/drawer_end_widget.dart';
 
